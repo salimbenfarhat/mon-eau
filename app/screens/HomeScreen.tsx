@@ -17,36 +17,35 @@ export default function HomeScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff', padding: 16 }}>
-      <Text style={{ fontSize: 24, fontWeight: '700' }}>Mon Eau</Text>
-      <Text style={{ color: '#6B7280', marginTop: 4 }}>Objectif du jour : {formatMl(goalMl)}</Text>
+      {/* header du Tab affiche déjà "Mon Eau" → pas de titre ici */}
 
-      <View style={{ alignItems: 'center', marginTop: 16 }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <ProgressRing progress={progress} />
         <Text style={{ marginTop: 12, fontSize: 18 }}>
           {formatMl(totalMl)} / {formatMl(goalMl)}
         </Text>
-      </View>
 
-      <Pressable
-        accessibilityRole="button"
-        accessibilityLabel={`Ajouter un verre, ${glassMl} millilitres`}
-        onPress={() => addGlass(glassMl, goalMl)}
-        style={{ backgroundColor: '#1EA7FD', paddingVertical: 16, borderRadius: 12, alignItems: 'center', marginTop: 16 }}
-      >
-        <Text style={{ color: 'white', fontSize: 18, fontWeight: '600' }}>+1 verre ({glassMl} ml)</Text>
-      </Pressable>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel={`Ajouter un verre, ${glassMl} millilitres`}
+          onPress={() => addGlass(glassMl, goalMl)}
+          style={{ backgroundColor: '#1EA7FD', paddingVertical: 16, paddingHorizontal: 24, borderRadius: 12, alignItems: 'center', marginTop: 16 }}
+        >
+          <Text style={{ color: 'white', fontSize: 18, fontWeight: '600' }}>+1 verre ({glassMl} ml)</Text>
+        </Pressable>
 
-      <Pressable
-        accessibilityRole="button"
-        accessibilityLabel="Annuler le dernier ajout"
-        onPress={undoLast}
-        style={{ borderColor: '#E5E7EB', borderWidth: 1, paddingVertical: 12, borderRadius: 12, alignItems: 'center', marginTop: 8 }}
-      >
-        <Text style={{ fontSize: 16 }}>Annuler</Text>
-      </Pressable>
+        <Pressable
+          accessibilityRole="button"
+          accessibilityLabel="Annuler le dernier ajout"
+          onPress={undoLast}
+          style={{ borderColor: '#E5E7EB', borderWidth: 1, paddingVertical: 12, paddingHorizontal: 20, borderRadius: 12, alignItems: 'center', marginTop: 8 }}
+        >
+          <Text style={{ fontSize: 16 }}>Annuler</Text>
+        </Pressable>
 
-      <View style={{ marginTop: 12 }}>
-        <Text style={{ color: '#6B7280' }}>Série : {currentStreak} • Meilleur : {bestStreak}</Text>
+        <Text style={{ color: '#6B7280', marginTop: 12 }}>
+          Série : {currentStreak} • Meilleur : {bestStreak}
+        </Text>
       </View>
     </View>
   );
