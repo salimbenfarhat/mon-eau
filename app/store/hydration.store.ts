@@ -2,7 +2,8 @@ import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getTodayKey } from '../lib/dates';
-import { useSettingsStore } from './settings.store'; // Import the settings store
+import { useSettingsStore } from './settings.store';
+import { useBadgesStore } from './badges.store';
 
 export type Entry = { id: string; ml: number; ts: number };
 export type DayLog = { date: string; totalMl: number; goalMl: number; entries: Entry[] };
@@ -57,6 +58,15 @@ export const useHydrationStore = create<State>()(
           currentStreak: { ...get().currentStreak, [profileId]: currentStreak },
           bestStreak: { ...get().bestStreak, [profileId]: bestStreak },
         });
+
+        // Check and award badges after hydration update
+        const currentHydrationState = get();
+        const currentSettingsState = useSettingsStore.getState();
+        useBadgesStore.getState().checkAndAwardBadges(
+          profileId,
+          currentHydrationState,
+          currentSettingsState
+        );
       },
       undoLast: () => {
         const profileId = useSettingsStore.getState().currentProfileId;
