@@ -15,6 +15,8 @@ export type Profile = {
   sex: Sex;
   isPregnant: boolean;
   isLactating: boolean;
+  notificationEnabled: boolean; // Added for notifications
+  notificationTime: string; // Added for notifications (e.g., "14:30")
 };
 
 type SettingsState = {
@@ -29,9 +31,11 @@ type SettingsState = {
   setUnit: (u: Unit) => void;
   setGlassMl: (ml: number) => void;
   setSex: (s: Sex) => void;
-  setAge: (age: number | null) => void; // Added setAge
+  setAge: (age: number | null) => void;
   setPregnant: (v: boolean) => void;
   setLactating: (v: boolean) => void;
+  setNotificationEnabled: (v: boolean) => void; // Added for notifications
+  setNotificationTime: (time: string) => void; // Added for notifications
 };
 
 function uid() {
@@ -112,6 +116,18 @@ export const useSettingsStore = create<SettingsState>()(
           get().updateProfile(currentProfileId, { age });
         }
       },
+      setNotificationEnabled: (notificationEnabled) => {
+        const { currentProfileId, profiles } = get();
+        if (currentProfileId && profiles[currentProfileId]) {
+          get().updateProfile(currentProfileId, { notificationEnabled });
+        }
+      },
+      setNotificationTime: (notificationTime) => {
+        const { currentProfileId, profiles } = get();
+        if (currentProfileId && profiles[currentProfileId]) {
+          get().updateProfile(currentProfileId, { notificationTime });
+        }
+      },
     }),
     {
       name: 'settings',
@@ -132,6 +148,8 @@ export const useSettingsStore = create<SettingsState>()(
                 sex: 'male', // Default to male
                 isPregnant: false,
                 isLactating: false,
+                notificationEnabled: false, // Default
+                notificationTime: '14:00', // Default
               },
             };
             state.currentProfileId = defaultProfileId;

@@ -5,6 +5,7 @@ import HomeScreen from '../screens/HomeScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import ProfilesScreen from '../screens/ProfilesScreen';
 import AboutScreen from '../screens/AboutScreen';
+import AchievementsScreen from '../screens/AchievementsScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -43,6 +44,13 @@ export default function Tabs() {
         component={AboutScreen}
         options={{
           tabBarIcon: ({ color, size }) => <Ionicons name="information-circle-outline" color={color} size={size} />,
+        }}
+      />
+      <Tab.Screen
+        name="Badges"
+        component={AchievementsScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => <Ionicons name="trophy-outline" color={color} size={size} />,
         }}
       />
     </Tab.Navigator>
