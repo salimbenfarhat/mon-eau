@@ -6,27 +6,47 @@ import { useSettingsStore } from '../store/settings.store';
 import { useHydrationStore } from '../store/hydration.store';
 import { roundUp, formatMl } from '../lib/units';
 import { getTodayKey } from '../lib/dates';
-import { playClick } from '../lib/sound'; // ✅ on garde SEULEMENT celui-ci
+import { playClick } from '../lib/sound';
 import { computeThresholds, computeLastHourMl } from '../lib/hydrationAlerts';
+import { calculateDailyGoal } from '../lib/hydrationUtils'; // Import the new utility
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated';
 
 export default function HomeScreen() {
-  const { weightKg, glassMl, sex, isPregnant, isLactating } = useSettingsStore();
+  const { profiles, currentProfileId } = useSettingsStore();
+  const currentProfile = currentProfileId ? profiles[currentProfileId] : null;
+
   const { logs, addGlass, currentStreak, bestStreak, undoLast } = useHydrationStore();
 
-  const goalMl = useMemo(() => (weightKg ? roundUp(weightKg * 30) : 2000), [weightKg]);
+  // Use current profile's settings
+  const weightKg = currentProfile?.weightKg ?? null;
+  const glassMl = currentProfile?.glassMl ?? 250;
+  const sex = currentProfile?.sex ?? null;
+  const isPregnant = currentProfile?.isPregnant ?? false;
+  const isLactating = currentProfile?.isLactating ?? false;
+
+  // Calculate goalMl using the new utility function
+  const goalMl = useMemo(() => {
+    if (!currentProfile) return 2000; // Default if no profile is selected
+    return calculateDailyGoal(currentProfile);
+  }, [currentProfile]);
   const today = getTodayKey();
-  const todayLog = logs[today];
-  const totalMl = todayLog?.totalMl ?? 0;
+
+  const profileTodayLog = currentProfileId ? logs[currentProfileId]?.[today] : undefined;
+  const totalMl = profileTodayLog?.totalMl ?? 0;
   const progress = Math.min(totalMl / goalMl, 1);
 
-  const thresholds = computeThresholds({ sex, isPregnant, isLactating, goalMl });
-  const lastHourMl = computeLastHourMl(todayLog?.entries ?? []);
+  // Ensure sex is not null when passed to computeThresholds
+  const thresholds = computeThresholds({ sex: sex ?? 'male', isPregnant, isLactating, goalMl });
+  const lastHourMl = computeLastHourMl(profileTodayLog?.entries ?? []);
 
   const ringScale = useSharedValue(1);
   const ringStyle = useAnimatedStyle(() => ({ transform: [{ scale: ringScale.value }] }));
 
   const handleAdd = async () => {
+    if (!currentProfileId) {
+      Alert.alert('Erreur', 'Veuillez sélectionner ou créer un profil.');
+      return;
+    }
     await playClick();
 
     const newTotal = totalMl + glassMl;
@@ -46,6 +66,9 @@ export default function HomeScreen() {
     ringScale.value = withTiming(1, { duration: 220, easing: Easing.out(Easing.cubic) });
     addGlass(glassMl, goalMl);
   };
+
+  const currentProfileStreak = currentProfileId ? currentStreak[currentProfileId] ?? 0 : 0;
+  const bestProfileStreak = currentProfileId ? bestStreak[currentProfileId] ?? 0 : 0;
 
   return (
     <View style={{ flex: 1, backgroundColor: '#fff', padding: 16 }}>
@@ -92,7 +115,7 @@ export default function HomeScreen() {
         </Pressable>
 
         <Text style={{ color: '#6B7280', marginTop: 12 }}>
-          Série : {currentStreak} • Meilleur : {bestStreak}
+          Série : {currentProfileStreak} • Meilleur : {bestProfileStreak}
         </Text>
       </View>
     </View>

@@ -13,8 +13,9 @@ export type RootStackParamList = {
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function AppNavigator() {
-  const weight = useSettingsStore((s) => s.weightKg);
-  const initialRoute = weight ? 'Tabs' : 'Onboarding';
+  const { profiles, currentProfileId } = useSettingsStore();
+  const currentProfile = currentProfileId ? profiles[currentProfileId] : null;
+  const initialRoute = currentProfile?.weightKg ? 'Tabs' : 'Onboarding';
 
   return (
     <NavigationContainer>
