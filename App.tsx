@@ -7,7 +7,7 @@ import AppNavigator from './app/AppNavigator';
 import { ErrorBoundary } from './app/lib/ErrorBoundary';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { initAudio, playStart, unloadAudio } from './app/lib/sound';
-import { registerForPushNotificationsAsync, scheduleHydrationReminder } from './app/lib/notifications';
+import { requestNotificationPermissionsAsync, scheduleHydrationReminder } from './app/lib/notifications';
 import { useSettingsStore } from './app/store/settings.store';
 
 import { useFonts } from 'expo-font';
@@ -24,8 +24,8 @@ export default function App() {
 
       // Register for push notifications and schedule reminders on app start
       if (currentProfileId && currentProfile?.notificationEnabled) {
-        await registerForPushNotificationsAsync();
-        await scheduleHydrationReminder(currentProfileId);
+        const permissionGranted = await requestNotificationPermissionsAsync();
+        if (permissionGranted) await scheduleHydrationReminder(currentProfileId);
       }
     })();
     return () => { unloadAudio(); };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Platform, KeyboardAvoidingView, ScrollView, Pressable } from 'react-native';
+import { Alert, View, Text, TextInput, Platform, KeyboardAvoidingView, ScrollView, Pressable } from 'react-native';
 import { useSettingsStore } from '../store/settings.store';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../AppNavigator';
@@ -15,8 +15,22 @@ export default function OnboardingScreen({ navigation }: Props) {
   const onContinue = () => {
     const w = parseFloat(weight);
     const g = parseInt(glass, 10);
-    if (!isNaN(w)) setWeight(w);
-    if (!isNaN(g)) setGlassMl(g);
+
+    if (!Number.isFinite(w) || w <= 0) {
+      Alert.alert('Poids invalide', 'Renseigne un poids supérieur à zéro.');
+      return;
+    }
+    if (!Number.isFinite(g) || g <= 0) {
+      Alert.alert('Verre invalide', 'Renseigne une taille de verre supérieure à zéro.');
+      return;
+    }
+    if (!sex) {
+      Alert.alert('Profil incomplet', 'Sélectionne un sexe pour calculer ton objectif.');
+      return;
+    }
+
+    setWeight(w);
+    setGlassMl(g);
     setSex(sex);
     setPregnant(false);
     setLactating(false);

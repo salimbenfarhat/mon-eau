@@ -111,7 +111,11 @@ export default function ProfilesScreen() {
     if (editingProfile) {
       updateProfile(editingProfile.id, profileData);
     } else {
-      addProfile(profileData);
+      addProfile({
+        ...profileData,
+        notificationEnabled: false,
+        notificationTime: '14:00',
+      });
     }
     setModalVisible(false);
   };

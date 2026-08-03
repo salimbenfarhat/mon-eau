@@ -16,10 +16,9 @@ Notifications.setNotificationHandler({
   }),
 });
 
-export async function registerForPushNotificationsAsync() {
-  let token;
+export async function requestNotificationPermissionsAsync() {
   if (Platform.OS === 'android') {
-    Notifications.setNotificationChannelAsync('default', {
+    await Notifications.setNotificationChannelAsync('default', {
       name: 'default',
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],
@@ -34,13 +33,9 @@ export async function registerForPushNotificationsAsync() {
     finalStatus = status;
   }
   if (finalStatus !== 'granted') {
-    alert('Failed to get push token for push notification!');
-    return;
+    return false;
   }
-  token = (await Notifications.getExpoPushTokenAsync()).data;
-  console.log(token); // For debugging, can be removed
-
-  return token;
+  return true;
 }
 
 export async function scheduleHydrationReminder(profileId: string) {

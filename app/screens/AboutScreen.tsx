@@ -81,11 +81,11 @@ export default function AboutScreen() {
       {/* Photo auteur */}
       <Image
         source={{
-          uri: "https://media.licdn.com/dms/image/v2/D4E03AQH6UGepqWABBg/profile-displayphoto-crop_800_800/B4EZi49ZKwHoAI-/0/1755449760597?e=1762387200&v=beta&t=MhGPysQqAdwLwfJBkx57iQRjLiWDhJ2h_HSi2BBlJJY",
+          uri: "https://github.com/salimbenfarhat.png",
         }}
         style={styles.image}
         accessible
-        accessibilityLabel="Photo de profil"
+        accessibilityLabel="Photo de profil de Salim Benfarhat"
       />
 
       {/* Auteur */}
