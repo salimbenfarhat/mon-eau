@@ -8,17 +8,15 @@ Toutes les commandes doivent être exécutées depuis le dossier `android/`.
 
 ### 1. Générer l'APK (pour installation directe)
 Idéal pour tester la version finale sur votre téléphone avant la publication.
-```bash
-cd android
-./gradlew assembleRelease
+```powershell
+$env:JAVA_HOME = "C:\Program Files\Eclipse Adoptium\jdk-17.0.20.8-hotspot"; $env:ANDROID_USER_HOME = "C:\GradleTemp"; cd android; .\gradlew assembleRelease "-Duser.home=C:\GradleTemp"
 ```
 **Fichier généré :** `android/app/build/outputs/apk/release/app-release.apk`
 
 ### 2. Générer le Bundle (pour le Play Store)
 Format requis pour importer l'application sur la Google Play Console.
-```bash
-cd android
-./gradlew bundleRelease
+```powershell
+$env:JAVA_HOME = "C:\Program Files\Eclipse Adoptium\jdk-17.0.20.8-hotspot"; $env:ANDROID_USER_HOME = "C:\GradleTemp"; cd android; .\gradlew bundleRelease "-Duser.home=C:\GradleTemp"
 ```
 **Fichier généré :** `android/app/build/outputs/bundle/release/app-release.aab`
 

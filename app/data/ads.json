@@ -1,34 +1,29 @@
 [
   {
-    "id": "etoro",
-    "brand": "eToro",
-    "title": "Investissez intelligemment",
-    "description": "Rejoignez des millions d'investisseurs et copiez les meilleurs traders.",
-    "cta": "S'inscrire",
-    "backgroundColor": "#00d100"
-  },
-  {
     "id": "infomaniak",
     "brand": "Infomaniak",
     "title": "Hébergement Éco-responsable",
     "description": "L'indépendance suisse pour vos données et vos emails.",
     "cta": "Découvrir",
-    "backgroundColor": "#ff6600"
+    "backgroundColor": "#0098ff",
+    "url": "https://sbsb.fr/infomaniak"
   },
   {
-    "id": "cryptocom",
-    "brand": "Crypto.com",
-    "title": "Achetez plus de 250 cryptos",
-    "description": "Le moyen le plus simple et sécurisé de gérer vos actifs numériques.",
-    "cta": "Installer",
-    "backgroundColor": "#10339a"
+    "id": "indy",
+    "brand": "Indy",
+    "title": "Comptabilité Simplifiée",
+    "description": "L'outil tout-en-un pour les indépendants et les entreprises.",
+    "cta": "Essayer",
+    "backgroundColor": "#FA5D89",
+    "url": "https://sbsb.fr/indy"
   },
   {
-    "id": "revolut",
-    "brand": "Revolut",
-    "title": "Une banque, tout un monde",
-    "description": "Changez vos devises sans frais et gérez votre budget facilement.",
-    "cta": "Ouvrir un compte",
-    "backgroundColor": "#000000"
+    "id": "igraal",
+    "brand": "iGraal",
+    "title": "Récupérez du Cash",
+    "description": "Le cashback n°1 en France pour tous vos achats en ligne.",
+    "cta": "Profiter",
+    "backgroundColor": "#FD5A13",
+    "url": "https://sbsb.fr/igraal"
   }
 ]

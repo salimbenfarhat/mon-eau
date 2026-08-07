@@ -13,7 +13,8 @@ expo-env.d.ts
 .kotlin/
 *.orig.*
 *.jks
-*.p8
+*.keystore
+*.orig
 *.p12
 *.key
 *.mobileprovision
@@ -46,4 +47,10 @@ yarn-error.*
 
 # generated native folders
 /ios
-/android
+# /android is no longer ignored to keep build logic,
+# but sensitive files inside are ignored below:
+android/gradle.properties
+android/app/*.jks
+android/app/*.keystore
+android/app/build/
+android/build/

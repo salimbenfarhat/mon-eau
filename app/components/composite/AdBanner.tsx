@@ -32,7 +32,7 @@ export default function AdBanner() {
           <Text style={styles.title}>{ad.title}</Text>
           <Text style={styles.desc} numberOfLines={1}>{ad.description}</Text>
         </View>
-        <Pressable style={styles.cta} onPress={() => Alert.alert('Redirection', `Visite du site ${ad.brand}...`)}>
+        <Pressable style={styles.cta} onPress={() => Linking.openURL(ad.url)}>
           <Text style={styles.ctaText}>{ad.cta}</Text>
         </Pressable>
       </View>
