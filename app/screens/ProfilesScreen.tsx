@@ -2,9 +2,15 @@ import React, { useState } from 'react';
 import { View, Text, Pressable, FlatList, Modal, TextInput, Alert, StyleSheet } from 'react-native';
 import { useSettingsStore, Profile, Sex } from '../store/settings.store';
 import { Ionicons } from '@expo/vector-icons';
+import { useGamificationStore } from '../store/gamification.store';
+import { THEMES } from '../lib/themes';
 
 export default function ProfilesScreen() {
   const { profiles, currentProfileId, addProfile, updateProfile, removeProfile, setCurrentProfile } = useSettingsStore();
+  const { data: gamificationData } = useGamificationStore();
+  const profileGamification = currentProfileId ? gamificationData[currentProfileId] : null;
+  const theme = THEMES[profileGamification?.currentTheme ?? 'default'];
+
   const profilesArray = Object.values(profiles);
 
   const [isModalVisible, setModalVisible] = useState(false);
@@ -140,17 +146,18 @@ export default function ProfilesScreen() {
       onPress={() => setCurrentProfile(item.id)}
       style={[
         styles.profileItem,
-        item.id === currentProfileId && styles.currentProfileItem,
+        { backgroundColor: theme.card },
+        item.id === currentProfileId && [styles.currentProfileItem, { borderColor: theme.primary }],
       ]}
     >
       <View style={{ flex: 1 }}>
-        <Text style={styles.profileName}>{item.name}</Text>
-        {item.weightKg && <Text style={styles.profileDetail}>Poids: {item.weightKg} kg</Text>}
-        {item.age !== null && <Text style={styles.profileDetail}>Âge: {item.age} ans</Text>}
-        <Text style={styles.profileDetail}>Verre: {item.glassMl} ml</Text>
+        <Text style={[styles.profileName, { color: theme.text }]}>{item.name}</Text>
+        {item.weightKg && <Text style={[styles.profileDetail, { color: theme.subText }]}>Poids: {item.weightKg} kg</Text>}
+        {item.age !== null && <Text style={[styles.profileDetail, { color: theme.subText }]}>Âge: {item.age} ans</Text>}
+        <Text style={[styles.profileDetail, { color: theme.subText }]}>Verre: {item.glassMl} ml</Text>
       </View>
       <Pressable onPress={() => openEditModal(item)} style={styles.editButton}>
-        <Ionicons name="create-outline" size={24} color="#1EA7FD" />
+        <Ionicons name="create-outline" size={24} color={theme.primary} />
       </Pressable>
       <Pressable onPress={() => handleDeleteProfile(item.id)} style={styles.deleteButton}>
         <Ionicons name="trash-outline" size={24} color="#FF3B30" />
@@ -159,17 +166,17 @@ export default function ProfilesScreen() {
   );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Profils</Text>
+    <View style={[styles.container, { backgroundColor: theme.background }]}>
+      <Text style={[styles.header, { color: theme.text }]}>Profils</Text>
 
       <FlatList
         data={profilesArray}
         keyExtractor={(item) => item.id}
         renderItem={renderProfileItem}
-        ListEmptyComponent={<Text style={styles.emptyText}>Aucun profil créé. Ajoutez-en un !</Text>}
+        ListEmptyComponent={<Text style={[styles.emptyText, { color: theme.subText }]}>Aucun profil créé. Ajoutez-en un !</Text>}
       />
 
-      <Pressable onPress={openAddModal} style={styles.addButton}>
+      <Pressable onPress={openAddModal} style={[styles.addButton, { backgroundColor: theme.primary }]}>
         <Text style={styles.addButtonText}>Ajouter un profil</Text>
       </Pressable>
 

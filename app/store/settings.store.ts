@@ -22,6 +22,8 @@ export type Profile = {
 type SettingsState = {
   profiles: Record<string, Profile>;
   currentProfileId: string | null;
+  hasSeenPrevention: boolean;
+  setHasSeenPrevention: (v: boolean) => void;
   addProfile: (profile: Omit<Profile, 'id'>) => void;
   updateProfile: (id: string, profile: Partial<Profile>) => void;
   removeProfile: (id: string) => void;
@@ -47,6 +49,8 @@ export const useSettingsStore = create<SettingsState>()(
     (set, get) => ({
       profiles: {},
       currentProfileId: null,
+      hasSeenPrevention: false,
+      setHasSeenPrevention: (v) => set({ hasSeenPrevention: v }),
       addProfile: (profileData) => {
         const id = uid();
         const newProfile: Profile = { ...profileData, id };

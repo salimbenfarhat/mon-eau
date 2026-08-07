@@ -1,6 +1,9 @@
 import React from "react";
 import { View, Text, Pressable, Linking, Image, StyleSheet } from "react-native";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useGamificationStore } from '../store/gamification.store';
+import { useSettingsStore } from '../store/settings.store';
+import { THEMES } from '../lib/themes';
 
 const styles = StyleSheet.create({
   container: {
@@ -66,12 +69,20 @@ const styles = StyleSheet.create({
 
 export default function AboutScreen() {
   const insets = useSafeAreaInsets();
+  const { currentProfileId } = useSettingsStore();
+  const { data: gamificationData } = useGamificationStore();
+  const profileGamification = currentProfileId ? gamificationData[currentProfileId] : null;
+  const theme = THEMES[profileGamification?.currentTheme ?? 'default'];
 
   return (
-    <View style={[styles.container, { paddingTop: insets.top + 16, paddingBottom: insets.bottom + 16 }]}>
-      <Text style={styles.title}>À propos</Text>
+    <View style={[styles.container, {
+      paddingTop: insets.top + 16,
+      paddingBottom: insets.bottom + 16,
+      backgroundColor: theme.background
+    }]}>
+      <Text style={[styles.title, { color: theme.text }]}>À propos</Text>
 
-      <Text style={styles.text}>
+      <Text style={[styles.text, { color: theme.text }]}>
         <Text style={styles.boldText}>Mon Eau</Text> est une application
         minimaliste pour suivre simplement votre hydratation quotidienne :
         objectif personnalisé, progression visuelle, et petites récompenses
@@ -83,16 +94,16 @@ export default function AboutScreen() {
         source={{
           uri: "https://github.com/salimbenfarhat.png",
         }}
-        style={styles.image}
+        style={[styles.image, { borderColor: theme.card }]}
         accessible
         accessibilityLabel="Photo de profil de Salim Benfarhat"
       />
 
       {/* Auteur */}
-      <Text style={styles.text}>
+      <Text style={[styles.text, { color: theme.text }]}>
         Auteur :{" "}
         <Text
-          style={styles.linkText}
+          style={[styles.linkText, { color: theme.primary }]}
           onPress={() => Linking.openURL("https://salim.link")}
         >
           Salim Benfarhat
@@ -105,9 +116,9 @@ export default function AboutScreen() {
         onPress={() =>
           Linking.openURL("https://github.com/salimbenfarhat/mon-eau")
         }
-        style={styles.button}
+        style={[styles.button, { backgroundColor: theme.text }]}
       >
-        <Text style={styles.buttonText}>
+        <Text style={[styles.buttonText, { color: theme.background }]}>
           Code disponible (GitHub)
         </Text>
       </Pressable>
@@ -116,7 +127,7 @@ export default function AboutScreen() {
       <Pressable
         accessibilityRole="button"
         onPress={() => Linking.openURL("https://salim.link/paypal")}
-        style={[styles.button, styles.paypalButton]}
+        style={[styles.button, { backgroundColor: theme.primary }]}
       >
         <Text style={styles.buttonText}>
           Soutenir le projet 💙
@@ -124,11 +135,11 @@ export default function AboutScreen() {
       </Pressable>
 
       {/* Contact */}
-      <View style={styles.contactContainer}>
-        <Text style={styles.boldText}>
+      <View style={[styles.contactContainer, { borderColor: theme.card }]}>
+        <Text style={[styles.boldText, { color: theme.text }]}>
           Vous avez un projet (app mobile, SaaS) ?
         </Text>
-        <Text style={styles.text}>
+        <Text style={[styles.text, { color: theme.text }]}>
           Contactez-moi :{" "}
           <Text style={styles.boldText}>collab@sablab.fr</Text>
         </Text>
@@ -136,19 +147,19 @@ export default function AboutScreen() {
 
       {/* Crédits sons */}
       <View style={styles.creditsContainer}>
-        <Text style={styles.boldText}>Crédits sons :</Text>
-        <Text style={styles.creditsText}>
+        <Text style={[styles.boldText, { color: theme.text }]}>Crédits sons :</Text>
+        <Text style={[styles.creditsText, { color: theme.subText }]}>
           • <Text style={styles.italicText}>Water Faucet 4</Text> —
           utilisé pour le splashscreen
         </Text>
-        <Text style={styles.creditsText}>
+        <Text style={[styles.creditsText, { color: theme.subText }]}>
           • <Text style={styles.italicText}>Water Faucet 1</Text> —
           utilisé pour le bouton +1 verre
         </Text>
-        <Text style={[styles.creditsText, { marginTop: 4 }]}>
+        <Text style={[styles.creditsText, { marginTop: 4, color: theme.subText }]}>
           Source :{" "}
           <Text
-            style={styles.linkText}
+            style={[styles.linkText, { color: theme.primary }]}
             onPress={() =>
               Linking.openURL(
                 "https://elevenlabs.io/sound-effects/water-faucet"

@@ -2,19 +2,37 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
-import HistoryScreen from '../screens/HistoryScreen';
+import AnalyticsScreen from '../screens/AnalyticsScreen';
 import ProfilesScreen from '../screens/ProfilesScreen';
-import AboutScreen from '../screens/AboutScreen';
-import AchievementsScreen from '../screens/AchievementsScreen';
+import ShopScreen from '../screens/ShopScreen';
+
+import { useGamificationStore } from '../store/gamification.store';
+import { useSettingsStore } from '../store/settings.store';
+import { THEMES } from '../lib/themes';
 
 const Tab = createBottomTabNavigator();
 
 export default function Tabs() {
+  const { currentProfileId } = useSettingsStore();
+  const { data: gamificationData } = useGamificationStore();
+  const profileGamification = currentProfileId ? gamificationData[currentProfileId] : null;
+  const currentThemeId = profileGamification?.currentTheme ?? 'default';
+  const theme = THEMES[currentThemeId];
+
   return (
     <Tab.Navigator
       screenOptions={{
         headerTitleAlign: 'center',
-        tabBarActiveTintColor: '#1EA7FD',
+        tabBarActiveTintColor: theme.primary,
+        tabBarInactiveTintColor: theme.subText,
+        tabBarStyle: {
+          backgroundColor: theme.background,
+          borderTopColor: theme.card,
+        },
+        headerStyle: {
+          backgroundColor: theme.background,
+        },
+        headerTintColor: theme.text,
       }}
     >
       <Tab.Screen
@@ -26,10 +44,17 @@ export default function Tabs() {
         }}
       />
       <Tab.Screen
-        name="Historique"
-        component={HistoryScreen}
+        name="Analyse"
+        component={AnalyticsScreen}
         options={{
           tabBarIcon: ({ color, size }) => <Ionicons name="stats-chart-outline" color={color} size={size} />,
+        }}
+      />
+      <Tab.Screen
+        name="Boutique"
+        component={ShopScreen}
+        options={{
+          tabBarIcon: ({ color, size }) => <Ionicons name="cart-outline" color={color} size={size} />,
         }}
       />
       <Tab.Screen
@@ -37,20 +62,6 @@ export default function Tabs() {
         component={ProfilesScreen}
         options={{
           tabBarIcon: ({ color, size }) => <Ionicons name="people-outline" color={color} size={size} />,
-        }}
-      />
-      <Tab.Screen
-        name="À propos"
-        component={AboutScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => <Ionicons name="information-circle-outline" color={color} size={size} />,
-        }}
-      />
-      <Tab.Screen
-        name="Badges"
-        component={AchievementsScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => <Ionicons name="trophy-outline" color={color} size={size} />,
         }}
       />
     </Tab.Navigator>

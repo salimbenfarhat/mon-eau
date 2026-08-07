@@ -10,12 +10,41 @@ import { playClick } from '../lib/sound';
 import { computeThresholds, computeLastHourMl } from '../lib/hydrationAlerts';
 import { calculateDailyGoal } from '../lib/hydrationUtils'; // Import the new utility
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing } from 'react-native-reanimated';
+import { useGamificationStore } from '../store/gamification.store';
+import VirtualPlant from '../components/composite/VirtualPlant';
+import { Ionicons } from '@expo/vector-icons';
+import { THEMES } from '../lib/themes';
+import { useNavigation } from '@react-navigation/native';
+import AdBanner from '../components/composite/AdBanner';
 
 export default function HomeScreen() {
+  const navigation = useNavigation<any>();
   const { profiles, currentProfileId } = useSettingsStore();
   const currentProfile = currentProfileId ? profiles[currentProfileId] : null;
 
   const { logs, addGlass, currentStreak, bestStreak, undoLast } = useHydrationStore();
+  const { data: gamificationData } = useGamificationStore();
+  const profileGamification = currentProfileId ? gamificationData[currentProfileId] : null;
+
+  const currentThemeId = profileGamification?.currentTheme ?? 'default';
+  const theme = THEMES[currentThemeId];
+
+  React.useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Pressable onPress={() => navigation.navigate('Settings')} style={{ marginRight: 16 }}>
+          <Ionicons name="settings-outline" size={24} color={theme.primary} />
+        </Pressable>
+      ),
+      headerLeft: () => (
+        <Pressable onPress={() => navigation.navigate('Achievements')} style={{ marginLeft: 16 }}>
+          <Ionicons name="trophy-outline" size={24} color={theme.primary} />
+        </Pressable>
+      ),
+      headerStyle: { backgroundColor: theme.background },
+      headerTintColor: theme.text,
+    });
+  }, [navigation, theme]);
 
   // Use current profile's settings
   const weightKg = currentProfile?.weightKg ?? null;
@@ -71,13 +100,36 @@ export default function HomeScreen() {
   const bestProfileStreak = currentProfileId ? bestStreak[currentProfileId] ?? 0 : 0;
 
   return (
-    <View style={{ flex: 1, backgroundColor: '#fff', padding: 16 }}>
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Animated.View style={ringStyle}>
-          <ProgressFillCircle progress={progress} />
-        </Animated.View>
+    <View style={{ flex: 1, backgroundColor: theme.background, padding: 16 }}>
+      {/* Header Gamification */}
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20, alignItems: 'center' }}>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={{ backgroundColor: theme.accent, padding: 8, borderRadius: 20, marginRight: 8 }}>
+            <Ionicons name="star" size={20} color={theme.primary} />
+          </View>
+          <Text style={{ fontSize: 16, fontWeight: '700', color: theme.text }}>
+            Niv. {profileGamification?.level ?? 1}
+          </Text>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#FEF3C7', paddingVertical: 6, paddingHorizontal: 12, borderRadius: 20 }}>
+          <Ionicons name="water" size={18} color="#D97706" style={{ marginRight: 4 }} />
+          <Text style={{ fontSize: 16, fontWeight: '700', color: '#B45309' }}>
+            {profileGamification?.gouttes ?? 0} gouttes
+          </Text>
+        </View>
+      </View>
 
-        <Text style={{ marginTop: 12, fontSize: 18 }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+          <Animated.View style={ringStyle}>
+            <ProgressFillCircle progress={progress} color={theme.primary} fill={theme.primary} bg={theme.ringBg} />
+          </Animated.View>
+          <View style={{ position: 'absolute' }}>
+            <VirtualPlant progress={progress} />
+          </View>
+        </View>
+
+        <Text style={{ marginTop: 12, fontSize: 18, fontWeight: '600', color: theme.text }}>
           {formatMl(totalMl)} / {formatMl(goalMl)}
         </Text>
 
@@ -86,7 +138,7 @@ export default function HomeScreen() {
           accessibilityLabel={`Ajouter un verre, ${glassMl} millilitres`}
           onPress={handleAdd}
           style={{
-            backgroundColor: '#1EA7FD',
+            backgroundColor: theme.primary,
             paddingVertical: 16,
             paddingHorizontal: 24,
             borderRadius: 12,
@@ -99,10 +151,10 @@ export default function HomeScreen() {
 
         <Pressable
           accessibilityRole="button"
-          accessibilityLabel="Annuler le dernier ajout"
+          accessibilityLabel="Supprimer le dernier ajout"
           onPress={undoLast}
           style={{
-            borderColor: '#E5E7EB',
+            borderColor: theme.card,
             borderWidth: 1,
             paddingVertical: 12,
             paddingHorizontal: 20,
@@ -111,13 +163,15 @@ export default function HomeScreen() {
             marginTop: 8,
           }}
         >
-          <Text style={{ fontSize: 16 }}>Annuler</Text>
+          <Text style={{ fontSize: 16, color: theme.subText }}>Supprimer le dernier ajout</Text>
         </Pressable>
 
-        <Text style={{ color: '#6B7280', marginTop: 12 }}>
+        <Text style={{ color: theme.subText, marginTop: 12 }}>
           Série : {currentProfileStreak} • Meilleur : {bestProfileStreak}
         </Text>
       </View>
+
+      <AdBanner />
     </View>
   );
 }

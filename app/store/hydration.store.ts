@@ -4,6 +4,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getTodayKey } from '../lib/dates';
 import { useSettingsStore } from './settings.store';
 import { useBadgesStore } from './badges.store';
+import { useGamificationStore } from './gamification.store';
 
 export type Entry = { id: string; ml: number; ts: number };
 export type DayLog = { date: string; totalMl: number; goalMl: number; entries: Entry[] };
@@ -67,6 +68,18 @@ export const useHydrationStore = create<State>()(
           currentHydrationState,
           currentSettingsState
         );
+
+        // --- Gamification ---
+        const gamificationStore = useGamificationStore.getState();
+        // Récompense par verre
+        gamificationStore.addGouttes(10);
+        gamificationStore.addXP(5);
+
+        // Bonus si objectif atteint (seulement au moment du franchissement)
+        if (log.totalMl < goalMl && newTotal >= goalMl) {
+          gamificationStore.addGouttes(100);
+          gamificationStore.addXP(50);
+        }
       },
       undoLast: () => {
         const profileId = useSettingsStore.getState().currentProfileId;

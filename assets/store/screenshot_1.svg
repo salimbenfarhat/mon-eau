@@ -1,0 +1,20 @@
+<svg width="1080" height="1920" viewBox="0 0 1080 1920" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1080" height="1920" fill="#F8F8F8"/>
+  <!-- Phone Frame (simplified) -->
+  <rect x="40" y="40" width="1000" height="1840" rx="100" stroke="#333" stroke-width="20"/>
+
+  <!-- App Content -->
+  <text x="540" y="200" font-family="Arial" font-size="60" font-weight="bold" fill="#333" text-anchor="middle">Mon Eau</text>
+
+  <!-- Progress Circle Mockup -->
+  <circle cx="540" cy="700" r="300" stroke="#E5E7EB" stroke-width="40" fill="white"/>
+  <path d="M540 400 A 300 300 0 0 1 840 700" stroke="#1EA7FD" stroke-width="40" fill="none" stroke-linecap="round"/>
+  <text x="540" y="730" font-family="Arial" font-size="80" font-weight="bold" fill="#333" text-anchor="middle">750 / 2000 ml</text>
+
+  <!-- Add Button -->
+  <rect x="240" y="1100" width="600" height="120" rx="30" fill="#1EA7FD"/>
+  <text x="540" y="1175" font-family="Arial" font-size="45" font-weight="bold" fill="white" text-anchor="middle">+1 verre (250 ml)</text>
+
+  <!-- Stats -->
+  <text x="540" y="1350" font-family="Arial" font-size="40" fill="#6B7280" text-anchor="middle">Série : 5 jours 🔥</text>
+</svg>

@@ -1,0 +1,34 @@
+[
+  {
+    "id": "etoro",
+    "brand": "eToro",
+    "title": "Investissez intelligemment",
+    "description": "Rejoignez des millions d'investisseurs et copiez les meilleurs traders.",
+    "cta": "S'inscrire",
+    "backgroundColor": "#00d100"
+  },
+  {
+    "id": "infomaniak",
+    "brand": "Infomaniak",
+    "title": "Hébergement Éco-responsable",
+    "description": "L'indépendance suisse pour vos données et vos emails.",
+    "cta": "Découvrir",
+    "backgroundColor": "#ff6600"
+  },
+  {
+    "id": "cryptocom",
+    "brand": "Crypto.com",
+    "title": "Achetez plus de 250 cryptos",
+    "description": "Le moyen le plus simple et sécurisé de gérer vos actifs numériques.",
+    "cta": "Installer",
+    "backgroundColor": "#10339a"
+  },
+  {
+    "id": "revolut",
+    "brand": "Revolut",
+    "title": "Une banque, tout un monde",
+    "description": "Changez vos devises sans frais et gérez votre budget facilement.",
+    "cta": "Ouvrir un compte",
+    "backgroundColor": "#000000"
+  }
+]

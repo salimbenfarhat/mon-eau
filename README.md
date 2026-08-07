@@ -1,5 +1,17 @@
 # Mon Eau 💧
 
+Application React Native (Expo) avec support natif Android (Gradle).
+
+## 🚀 Build Native (APK)
+Ce projet est configuré pour être buildé directement via Gradle.
+Pour générer l'APK de release :
+- **Windows** : `npm run build:apk`
+- **Mac/Linux** : `npm run build:android`
+
+Les fichiers APK se trouveront dans `android/app/build/outputs/apk/release/`.
+
+---
+
 **Mon Eau** est votre compagnon d'hydratation intelligent. Plus qu'un simple compteur, l'application s'adapte à votre profil pour vous garantir une hydratation saine, sécurisée et motivante au quotidien.
 
 ## 🌟 Pourquoi choisir Mon Eau ?

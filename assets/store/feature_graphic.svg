@@ -1,0 +1,15 @@
+<svg width="1024" height="500" viewBox="0 0 1024 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1024" height="500" fill="url(#paint0_linear)"/>
+  <defs>
+    <linearGradient id="paint0_linear" x1="0" y1="0" x2="1024" y2="500" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1EA7FD"/>
+      <stop offset="1" stop-color="#0E7490"/>
+    </linearGradient>
+  </defs>
+  <!-- App Name -->
+  <text x="512" y="240" font-family="Arial, sans-serif" font-size="80" font-weight="bold" fill="white" text-anchor="middle">Mon Eau 💧</text>
+  <!-- Tagline -->
+  <text x="512" y="320" font-family="Arial, sans-serif" font-size="32" fill="white" fill-opacity="0.9" text-anchor="middle">Votre compagnon d'hydratation intelligent</text>
+  <!-- Decorative Water Drop -->
+  <path d="M900 400C935.345 400 964 371.345 964 336C964 300.655 900 236 900 236C900 236 836 300.655 836 336C836 371.345 864.655 400 900 400Z" fill="white" fill-opacity="0.2"/>
+</svg>
