@@ -141,7 +141,7 @@ export default function AboutScreen() {
         </Text>
         <Text style={[styles.text, { color: theme.text }]}>
           Contactez-moi :{" "}
-          <Text style={styles.boldText}>collab@sablab.fr</Text>
+          <Text style={styles.boldText}>collab@salim.link</Text>
         </Text>
       </View>
 

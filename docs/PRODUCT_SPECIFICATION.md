@@ -82,5 +82,5 @@ L'application suit une règle stricte de **Zéro Donnée Externe**.
 4. **V2.0 :** Mode Social (Classements anonymes), Partenariats avec des marques de gourdes connectées.
 
 ---
-**Contact Auteur :** Salim Benfarhat - collab@sablab.fr
+**Contact Auteur :** Salim Benfarhat - collab@salim.link
 **GitHub :** [https://github.com/salimbenfarhat/mon-eau](https://github.com/salimbenfarhat/mon-eau)
