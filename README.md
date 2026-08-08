@@ -59,7 +59,7 @@ npm run build:apk
     <td>
       <strong>Salim Benfarhat</strong><br/>
       <em>Développeur Fullstack & Entrepreneur</em><br/>
-      <a href="https://salim.link">🌐 Site Personnel</a> • <a href="mailto:collab@sablab.fr">📧 Contact</a>
+      <a href="https://salim.link">🌐 Site Personnel</a> • <a href="mailto:collab@salim.link">📧 Contact</a>
     </td>
   </tr>
 </table>

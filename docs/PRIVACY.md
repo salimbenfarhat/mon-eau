@@ -26,4 +26,4 @@ Puisque vos données sont locales, vous en êtes le seul propriétaire :
 Nous nous réservons le droit de mettre à jour cette politique. Toute modification majeure sera signalée par une mise à jour de la date de révision.
 
 ## 6. Contact
-Pour toute question concernant vos données : collab@sablab.fr
+Pour toute question concernant vos données : info@sablab.fr
