@@ -1,61 +1,52 @@
 # Mon Eau 💧
 
-Application React Native (Expo) avec support natif Android (Gradle).
-
-## 🚀 Build Native (APK)
-Ce projet est configuré pour être buildé directement via Gradle.
-Pour générer l'APK de release :
-- **Windows** : `npm run build:apk`
-- **Mac/Linux** : `npm run build:android`
-
-Les fichiers APK se trouveront dans `android/app/build/outputs/apk/release/`.
-
----
-
 **Mon Eau** est votre compagnon d'hydratation intelligent. Plus qu'un simple compteur, l'application s'adapte à votre profil pour vous garantir une hydratation saine, sécurisée et motivante au quotidien.
 
-## 🌟 Pourquoi choisir Mon Eau ?
-
-L'hydratation n'est pas la même pour tout le monde. Que vous soyez un sportif, une future maman, ou que vous souhaitiez suivre la consommation de vos enfants, **Mon Eau** calcule précisément ce dont vous avez besoin.
-
-### 👤 Gestion Multi-Profils
-Gérez toute la famille au même endroit. Créez des profils personnalisés pour :
-- **Adultes** (Homme/Femme)
-- **Enfants & Nourrissons** (calculs adaptés aux plus petits)
-- **Femmes enceintes ou allaitantes** (besoins accrus automatiquement pris en compte)
-
-### 🎯 Objectifs sur mesure
-Fini le "2 litres pour tout le monde". L'application définit votre objectif quotidien en analysant :
-- Votre poids
-- Votre âge
-- Votre sexe
-- Vos besoins physiologiques spécifiques
-
-### ⚠️ Sécurité & Santé avant tout
-Boire trop d'eau trop vite peut être contre-productif. **Mon Eau** vous protège grâce à :
-- **Alerte de débit** : Notification si vous buvez plus d'un litre en une seule heure.
-- **Limites journalières** : Surveillance pour éviter une sur-hydratation excessive par rapport à vos besoins.
-
-### 📈 Suivi & Motivation
-- **Cercle de progression** : Visualisez en un coup d'œil où vous en êtes dans votre journée.
-- **Graphiques hebdomadaires** : Analysez vos tendances sur les 7 derniers jours.
-- **Système de Badges** : Débloquez des trophées pour récompenser votre régularité.
-- **Séries (Streaks)** : Relevez le défi de maintenir votre hydratation jour après jour.
-
 ---
 
-## 💡 Cas d'utilisation
+## 🚀 Fonctionnalités Clés
 
-- **Parent attentif** : Suivez si votre bébé boit assez de lait/eau au cours de la journée grâce au profil nourrisson.
-- **Future Maman** : Assurez-vous de couvrir vos besoins augmentés durant la grossesse sans avoir à faire de calculs complexes.
-- **Sportif** : Gardez un œil sur votre consommation après l'effort pour optimiser votre récupération.
+- **Moteur de Calcul Scientifique** : Objectifs personnalisés (poids, âge, sexe, grossesse/allaitement).
+- **Gamification "Forêt d'Eau"** : Faites grandir votre plante virtuelle à chaque verre bu.
+- **Sécurité & Santé** : Alertes de débit (>1L/h) et analyse de régularité.
+- **Rapports Médicaux** : Exportation PDF pour votre médecin ou le DMP.
+- **Privacy-First** : Vos données restent 100% locales sur votre téléphone.
+- **Engagement Solidaire** : Soutien aux associations pour l'accès à l'eau potable.
+
+## 🛠️ Stack Technique
+
+- **Framework** : React Native (Expo SDK 54)
+- **Build System** : Gradle Local (Native Android)
+- **State Management** : Zustand
+- **Animations** : React Native Reanimated
+
+## 📖 Documentation & Spécifications
+
+Toute la documentation détaillée du projet a été centralisée dans le dossier [**`/docs`**](./docs/) :
+
+- [**Fiche Produit (Product Spec)**](./docs/PRODUCT_SPECIFICATION.md) : Vision globale et détails fonctionnels.
+- [**Game Design**](./docs/GAME_DESIGN.md) : Progression, niveaux et badges.
+- [**Monétisation**](./docs/MONETISATION.md) : Stratégie de revenus.
+- [**Instructions de Build**](./docs/BUILD_INSTRUCTIONS.md) : Comment générer l'APK/AAB avec Gradle.
+
+## 🚀 Installation & Build
+
+### Pré-requis
+- Node.js & npm
+- JDK 17 (Recommandé)
+- Android SDK
+
+### Développement
+```bash
+npm install
+npx expo start
+```
+
+### Build APK (Production)
+```bash
+npm run build:apk
+```
 
 ---
-
-## 🥛 Utilisation simplifiée
-1. **Configurez votre verre habituel** (ex: 250ml).
-2. **Un clic sur le bouton "+"** suffit pour enregistrer votre consommation.
-3. **Annulation facile** en cas d'erreur de saisie.
-
----
-*Mon Eau - Pour une hydratation qui vous ressemble.*
+**Auteur :** Salim Benfarhat - [salim.link](https://salim.link)
+**Contact :** collab@sablab.fr
