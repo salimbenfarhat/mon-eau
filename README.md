@@ -48,5 +48,25 @@ npm run build:apk
 ```
 
 ---
-**Auteur :** Salim Benfarhat - [salim.link](https://salim.link)
-**Contact :** collab@sablab.fr
+
+## 👨‍💻 À propos de l'Auteur
+
+<table>
+  <tr>
+    <td width="120px">
+      <img src="https://github.com/salimbenfarhat.png" width="100px;" style="border-radius:50%;" alt="Salim Benfarhat"/>
+    </td>
+    <td>
+      <strong>Salim Benfarhat</strong><br/>
+      <em>Développeur Fullstack & Entrepreneur</em><br/>
+      <a href="https://salim.link">🌐 Site Personnel</a> • <a href="mailto:collab@sablab.fr">📧 Contact</a>
+    </td>
+  </tr>
+</table>
+
+<br/>
+
+[![Soutenir via don](https://img.shields.io/badge/Soutenir_le_projet-PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white)](https://salim.link/paypal)
+
+---
+*Mon Eau - Pour une hydratation qui vous ressemble.*
